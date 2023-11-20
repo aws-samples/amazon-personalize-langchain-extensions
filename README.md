@@ -32,7 +32,7 @@ client=AmazonPersonalize(credentials_profile_name="default",region_name="us-west
 client.get_recommendations(user_id="1")
 ```
 
-### 2.2 [Use-case-2] Setup Amazon Personalize Client and invoke Personalize Chain for summarizing results
+### [Use-case-2] Setup Amazon Personalize Client and invoke Personalize Chain for summarizing results
 
 ```python
 from aws_langchain import AmazonPersonalize
@@ -54,7 +54,7 @@ response = chain({'user_id': '1'})
 print(response)
 ```
 
-### 2.3 [Use-Case-3] Invoke Amazon Personalize Chain using your own prompt
+### [Use-Case-3] Invoke Amazon Personalize Chain using your own prompt
 
 ```python
 from langchain.prompts.prompt import PromptTemplate
@@ -87,7 +87,7 @@ client=AmazonPersonalize(credentials_profile_name="default",region_name="us-west
 chain=AmazonPersonalizeChain.from_llm(llm=bedrock_llm, client=client, return_direct=False, prompt_template=RANDOM_PROMPT)
 chain.run({'user_id':'1', 'item_id':'234'})
 ```
-### 2.4 [Use-case-4] Invoke Amazon Personalize in a Sequential Chain 
+### [Use-case-4] Invoke Amazon Personalize in a Sequential Chain 
 
 ```python
 from langchain.chains import SequentialChain
