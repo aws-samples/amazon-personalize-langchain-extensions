@@ -10,7 +10,7 @@ git clone https://github.com/aws-samples/amazon-personalize-langchain-extensions
 
 Move to the repo dir
 ```bash
-cd AmazonPersonalize-langchain-extensions
+cd amazon-personalize-langchain-extensions
 ```
 
 
