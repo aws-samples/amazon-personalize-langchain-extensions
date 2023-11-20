@@ -20,8 +20,8 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://gitlab.aws.dev/langchain/aws-langchain"
-"Bug Tracker" = "https://gitlab.aws.dev/langchain/aws-langchain/issues"
+"Homepage" = "https://github.com/aws-samples/amazon-personalize-langchain-extensions"
+"Bug Tracker" = "https://github.com/aws-samples/amazon-personalize-langchain-extensions/issues"
 
 [tool.setuptools]
 packages = ["aws_langchain"]
