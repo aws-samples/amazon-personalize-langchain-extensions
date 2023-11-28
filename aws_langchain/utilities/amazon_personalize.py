@@ -81,6 +81,7 @@ class AmazonPersonalize:
         num_results: Optional[int] = 10,
         context: Optional[Mapping[str, str]] = None,
         promotions: Optional[Sequence[Mapping[str, Any]]] = None,
+        metadata_columns: Optional[Mapping[str,Sequence[str]]] = None,
         **kwargs: Any,
     ) -> Mapping[str, Any]:
         """Get recommendations from Amazon Personalize:
@@ -100,6 +101,8 @@ class AmazonPersonalize:
                                     to use when getting recommendations
             promotions: Sequence, Optional: The promotions
                                     to apply to the recommendation request.
+            metadata_columns: Mapping, Optional: The metadata Columns to be returned
+                                    as part of the response.
 
         Returns:
             response: Mapping[str, Any]: Returns an itemList and recommendationId.
@@ -128,6 +131,8 @@ class AmazonPersonalize:
             kwargs["promotions"] = promotions
         if item_id:
             kwargs["itemId"] = item_id
+        if metadata_columns:
+            kwargs["metadataColumns"] = metadata_columns
         if self.campaign_arn:
             kwargs["campaignArn"] = self.campaign_arn
         if self.recommender_arn:
@@ -142,6 +147,7 @@ class AmazonPersonalize:
         filter_arn: Optional[str] = None,
         filter_values: Optional[Mapping[str, str]] = None,
         context: Optional[Mapping[str, str]] = None,
+        metadata_columns: Optional[Mapping[str,Sequence[str]]] = None,
         **kwargs: Any,
     ) -> Mapping[str, Any]:
         """Re-ranks a list of recommended items for the given user.
@@ -156,6 +162,8 @@ class AmazonPersonalize:
                                                 when filtering recommendations.
             context: Mapping, Optional: The contextual metadata
                                             to use when getting recommendations
+            metadata_columns: Mapping, Optional: The metadata Columns to be returned
+                                    as part of the response.
 
         Returns:
             response: Mapping[str, Any]: Returns personalizedRanking
@@ -180,6 +188,8 @@ class AmazonPersonalize:
             kwargs["inputList"] = input_list
         if context:
             kwargs["context"] = context
+        if metadata_columns:
+            kwargs["metadataColumns"] = metadata_columns
         kwargs["campaignArn"] = self.campaign_arn
 
         return self.client.get_personalized_ranking(kwargs)

@@ -33,8 +33,8 @@ FILTER_ARN_INPUT_KEY = "filter_arn"
 FILTER_VALUES_INPUT_KEY = "filter_values"
 CONTEXT_INPUT_KEY = "context"
 PROMOTIONS_INPUT_KEY = "promotions"
+METADATA_COLUMNS_INPUT_KEY="metadata_columns"
 RESULT_OUTPUT_KEY = "result"
-
 
 class AmazonPersonalizeChain(Chain):
     """Amazon Personalize Chain for retrieving recommendations
@@ -144,6 +144,7 @@ class AmazonPersonalizeChain(Chain):
         filter_values = inputs.get(FILTER_VALUES_INPUT_KEY)
         promotions = inputs.get(PROMOTIONS_INPUT_KEY)
         context = inputs.get(CONTEXT_INPUT_KEY)
+        metadata_columns = inputs.get(METADATA_COLUMNS_INPUT_KEY)
 
         intermediate_steps: List = []
         intermediate_steps.append({"Calling Amazon Personalize"})
@@ -155,6 +156,7 @@ class AmazonPersonalizeChain(Chain):
                 filter_arn=filter_arn,
                 filter_values=filter_values,
                 context=context,
+                metadataColumns=metadata_columns
             )
         else:
             response = self.client.get_recommendations(
@@ -164,6 +166,7 @@ class AmazonPersonalizeChain(Chain):
                 filter_values=filter_values,
                 context=context,
                 promotions=promotions,
+                metadataColumns=metadata_columns
             )
 
         _run_manager.on_text("Call to Amazon Personalize complete \n")

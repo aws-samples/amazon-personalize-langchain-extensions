@@ -6,8 +6,7 @@ from langchain.llms.bedrock import Bedrock
 if __name__ == "__main__":
 
     recommender_arn="<insert_arn>"
-
-    user_id = '1'
+    user_id = '0001'
 
     # Create Amazon personalize client
     client = AmazonPersonalize(
@@ -16,8 +15,12 @@ if __name__ == "__main__":
         recommender_arn=recommender_arn
     )
 
+    input_list = ["METADATA_COL1"]
+    metadataMap = {"ITEMS": input_list}
+
     response = client.get_recommendations(
-        user_id=user_id
+        user_id=user_id,
+        metadataColumns=metadataMap
     )
 
     print(response['itemList'])
@@ -27,15 +30,11 @@ if __name__ == "__main__":
     
     # Create personalize chain
     chain = AmazonPersonalizeChain.from_llm(
-        llm=llm, 
+        llm=llm,
         client=client,
         return_direct=False
     )
-    response = chain({'user_id': '1'})
-    
-    # 
-    # chain({'input_list': []})
-    
+    response = chain({'user_id': user_id, 'metadata_columns': metadataMap})
     print(response['result'])
 
 
