@@ -124,6 +124,30 @@ overall_chain = SequentialChain(chains=[personalize_chain_instance, random_chain
 overall_chain.run({'user_id':'1', 'item_id':'234'})
 ```
 
+### [Use-case-5] Invoke Amazon Personalize using metadata from response 
+
+```python
+from aws_langchain import AmazonPersonalize
+from aws_langchain import AmazonPersonalizeChain
+from langchain.llms.bedrock import Bedrock
+
+recommender_arn="<insert_arn>"
+metadata_column_list = ["METADATA_COL1"]
+metadataMap = {"ITEMS": metadata_column_list}
+
+bedrock_llm = Bedrock(model_id="anthropic.claude-v2", region_name="us-west-2")
+client=AmazonPersonalize(credentials_profile_name="default",region_name="us-west-2",recommender_arn=recommender_arn)
+# Create personalize chain
+# Use return_direct=True if you do not want summary
+chain = AmazonPersonalizeChain.from_llm(
+    llm=bedrock_llm, 
+    client=client,
+    return_direct=False 
+)
+response = chain({'user_id': '1', 'metadata_columns': metadataMap})
+print(response)
+```
+
 ## Uninstall
 ```bash
 pip uninstall aws-langchain
