@@ -156,7 +156,7 @@ class AmazonPersonalizeChain(Chain):
                 filter_arn=filter_arn,
                 filter_values=filter_values,
                 context=context,
-                metadataColumns=metadata_columns
+                metadata_columns=metadata_columns
             )
         else:
             response = self.client.get_recommendations(
@@ -166,7 +166,7 @@ class AmazonPersonalizeChain(Chain):
                 filter_values=filter_values,
                 context=context,
                 promotions=promotions,
-                metadataColumns=metadata_columns
+                metadata_columns=metadata_columns
             )
 
         _run_manager.on_text("Call to Amazon Personalize complete \n")
