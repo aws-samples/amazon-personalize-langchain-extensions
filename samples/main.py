@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
     response = client.get_recommendations(
         user_id=user_id,
-        metadataColumns=metadataMap
+        metadata_columns=metadataMap
     )
 
     print(response['itemList'])
