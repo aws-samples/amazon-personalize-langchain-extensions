@@ -1,0 +1,6 @@
+/.idea
+aws_langchain.egg-info
+aws_langchain/__pycache__/
+aws_langchain/chains/recommenders/__pycache__/
+aws_langchain/utilities/__pycache__/
+/build
